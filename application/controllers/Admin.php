@@ -11,17 +11,17 @@ class Admin extends CI_Controller
 		$this->load->model('Model_utama','model_utama');
 		$this->load->helper('text');
 		
-		if($this->session->userdata('status') != "login"){
-			redirect(base_url("login"));
-		}
+		// if($this->session->userdata('status') != "login"){
+		// 	redirect(base_url("login"));
+		// }
 
-		$this->load->library(['encryption']);
+		// $this->load->library(['encryption']);
 		
 	}
 	
 	function index(){
-		$data['contents'] = $this->load->view('admin/dashboard/main_dashboard',null, TRUE);
-		$this->load->view('admin/index',$data);
+		$data['contents'] = $this->load->view('main/dashboard',null, TRUE);
+		$this->load->view('index',$data);
 	}
 	// function menu(){
 	// 	$data['parent_menu'] = $this->model_utama->getAllData('menu');

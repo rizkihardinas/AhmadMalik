@@ -29,11 +29,11 @@
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
-<script src="dist/js/adminlte.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/adminlte.js"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
-<script src="dist/js/demo.js"></script>
-<script src="dist/js/pages/dashboard3.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/demo.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/pages/dashboard3.js"></script>
 </body>
 </html>
