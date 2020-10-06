@@ -43,9 +43,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="<?php echo base_url('') ?>merchants/add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Merchants</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="pages/tables/simple.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Merchans</p>
+                  <p>Data Merchants</p>
                 </a>
               </li>
               <li class="nav-item">
