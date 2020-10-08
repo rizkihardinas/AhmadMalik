@@ -22,7 +22,19 @@ class Merchants extends CI_Controller
 	}
 	
 	public function index(){
-		$data['contents'] = $this->load->view('main/Merchants',null, TRUE);
+		$data['contents'] = $this->load->view('main/merchants/merchants',null, TRUE);
+		$this->load->view('index',$data);
+	}
+	public function add(){
+		$data['contents'] = $this->load->view('main/merchants/add_merchants',null, TRUE);
+		$this->load->view('index',$data);
+	}
+	public function rating(){
+		$data['contents'] = $this->load->view('main/merchants/rating',null, TRUE);
+		$this->load->view('index',$data);
+	}
+	public function gallery(){
+		$data['contents'] = $this->load->view('main/merchants/gallery',null, TRUE);
 		$this->load->view('index',$data);
 	}
 }

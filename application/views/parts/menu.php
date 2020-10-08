@@ -35,7 +35,7 @@
           
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-home"></i>
               <p>
                 Merchants
                 <i class="fas fa-angle-left right"></i>
@@ -49,25 +49,30 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="<?php echo base_url('') ?>merchants" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Merchants</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="<?php echo base_url('') ?>merchants/rating" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rating</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('') ?>merchants/gallery" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gallery</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="<?php echo base_url('') ?>user/user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Post
-                <i class="fas fa-angle-left right"></i>
+                User
               </p>
             </a>
           </li>
@@ -76,7 +81,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
-                User
+                User Admin
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
