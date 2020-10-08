@@ -1,7 +1,7 @@
 <?php 
-$this->load->view('pages/header');
-$this->load->view('pages/menu');
+$this->load->view('parts/header');
+$this->load->view('parts/menu');
 echo $contents;
-$this->load->view('pages/footer');
+$this->load->view('parts/footer');
 ?> 
 

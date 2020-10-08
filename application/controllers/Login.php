@@ -1,17 +1,22 @@
 <?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('JobHistory','JobHistory');
+		$this->load->database();
+		$this->load->helper('url');
+		$this->load->helper('text');
+		$this->load->model('Constants_model','constants_model');
+		
 	}
-	function index(){
+	
+	public function index(){
 		$this->load->view('login');
 	}
 
@@ -22,10 +27,10 @@ class Login extends CI_Controller
 			'username' => $username,
 			'password' => md5($password)
 			);
-		$cek = $this->JobHistory->cek_login("employee",$where)->num_rows();
+		$cek = $this->constants_model->cek_login("admin",$where)->num_rows();
 		if($cek > 0){
 
- 			$get = $this->JobHistory->cek_login("employee",$where);
+ 			$get = $this->constants_model->cek_login("admin",$where);
 			foreach($get->result() as $r) {
 		      	
 				$data_session = array(
@@ -38,13 +43,13 @@ class Login extends CI_Controller
 
 			$this->session->set_userdata($data_session);
  
-			redirect(base_url("admin/index"));
+			redirect(base_url("admin"));
  
 		}else{
 			echo $where;
 		}
 	}
- 
+
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url('login'));
