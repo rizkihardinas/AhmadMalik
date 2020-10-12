@@ -16,6 +16,8 @@
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
                 <input type="text" id="name" name="name" class="form-control">
+                <input type="hidden" id="latitude" name="latitude" class="form-control">
+                <input type="hidden" id="longitude" name="longitude" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputClientCompany">Harga Terendah</label>
@@ -29,14 +31,7 @@
                 <label for="inputDescription">Deskripsi</label>
                 <textarea id="description" class="form-control" name="description" rows="4"></textarea>
               </div>
-              <div class="form-group">
-                <label for="inputClientCompany">Latitude</label>
-                <input type="text" id="latitude" name="latitude" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputProjectLeader">Longitude</label>
-                <input type="text" id="longitude" name="longitude" class="form-control">
-              </div>  
+              <div id='map' style='width: 400px; height: 300px;'></div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -74,3 +69,24 @@
       </div>
     </section>
     <!-- /.content -->
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoicml6a2loYXJkaW5hcyIsImEiOiJja2ZzMGt4MGMwOXg2MnJvMmU3M21vbjZmIn0.RWCidM5bmagDh2oyqh0_SQ';
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    center: [12.550343, 55.665957], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+    });
+    map.on('click', function(e) {
+    // The event object (e) contains information like the
+    // coordinates of the point on the map that was clicked.
+    alert(e.lngLat.toString());
+
+    var marker = new mapboxgl.Marker();
+    marker.remove();
+    marker.setLngLat(e.lngLat);
+    marker.addTo(map);
+  });
+
+
+    </script>  
