@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/ekko-lightbox/ekko-lightbox.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
