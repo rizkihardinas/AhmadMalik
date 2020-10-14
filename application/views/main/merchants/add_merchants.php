@@ -1,7 +1,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <?php echo form_open('Merchants/insert/') ?>
+      <?php echo form_open_multipart('Merchants/insert/') ?>
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">
