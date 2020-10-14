@@ -43,6 +43,7 @@ class Merchants extends CI_Controller
 		$name = $this->input->post('name');
 		$address  = $this->input->post('address');
 		$min_price = $this->input->post('min_price');
+		$address = $this->input->post('address');
 		$max_price = $this->input->post('max_price');
 		$description = $this->input->post('description');
 		$latLng = $this->input->post('latitude');
@@ -53,21 +54,38 @@ class Merchants extends CI_Controller
 		$latitude = $dataLatLng[0];
 		$longitude = $dataLatLng[1];
 		
-		$data = array(
-			'name' => $name,
-			'min_price' => $min_price,
-			'max_price' => $max_price,
-			'description' => $description,
-			'latitude' => $latitude,
-			'longitude' => $longitude
-		);
+		
+		$config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        // $config['max_size']             = 100;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
 
-		$insert  = $this->db_model->setInsertData('merchants',$data);
-		if ($insert) {
-			echo 1;
-		}else{
-			echo 0;
-		}
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('customFile'))
+        {
+                $this->session->set_flashdata('msg',$this->upload->display_errors());
+				$this->session->set_flashdata('response','warning');
+        }
+        else
+        {
+                $file = $this->upload->data();
+                $data = array(
+					'name' => $name,
+					'min_price' => $min_price,
+					'max_price' => $max_price,
+					'photo' => $file['file_name'],
+					'description' => $description,
+					'latitude' => $latitude,
+					'longitude' => $longitude
+				);
+                $insert  = $this->db_model->setInsertData('merchants',$data);
+				$this->session->set_flashdata('msg','Berhasil');
+				$this->session->set_flashdata('response','success');
+        }
+		
+		redirect('merchants');
 	}
 
 	function dt_merchants(){

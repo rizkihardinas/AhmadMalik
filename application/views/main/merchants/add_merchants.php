@@ -1,6 +1,7 @@
 
     <!-- Main content -->
     <section class="content">
+      <?php echo form_open('Merchants/insert/') ?>
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">
@@ -55,7 +56,7 @@
               <div class="form-group">
                 <label for="inputEstimatedBudget">Foto Merchants</label>
                   <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
+                      <input type="file" class="custom-file-input" id="customFile" name="customFile">
                       <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
               </div>
@@ -72,6 +73,7 @@
         </div>
       </div>
     </section>
+    <?php echo form_close() ?>
     <!-- /.content -->
     <script>
 
