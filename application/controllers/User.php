@@ -145,7 +145,7 @@ class User extends CI_Controller
           $length = intval($this->input->get("length"));
 
 
-          $merchants = $this->db_model->getAllData('merchants');
+          $merchants = $this->db_model->getAllData('users');
 
           $data = array();
 
@@ -156,18 +156,15 @@ class User extends CI_Controller
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'customer/edit/'.$r->id.'" target="_blank">Edit</a>
-                <a class="dropdown-item" id="btnHapusCustomer" data-id="'.$r->id.'">Hapus</a>
+                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'user/edit/'.$r->id.'" target="_blank">Edit</a>
+                <a class="dropdown-item" id="btnHapusUser" data-id="'.$r->id.'">Hapus</a>
               </div>
             </div>
             ';
           $data[] = array(
                     $r->name,
-                    $r->min_price,
-                    $r->max_price,
-                    $r->description,
-                    $r->latitude,
-                    $r->longitude,
+                    $r->phone,
+                    $r->email,
                     $r->dateCreated,
                     $button
                );

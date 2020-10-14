@@ -161,7 +161,7 @@ class Merchants extends CI_Controller
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                 <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'customer/edit/'.$r->id.'" target="_blank">Edit</a>
-                <a class="dropdown-item" id="btnHapusCustomer" data-id="'.$r->id.'">Hapus</a>
+                <a class="dropdown-item" id="btnHapusMerchants" data-id="'.$r->id.'">Hapus</a>
               </div>
             </div>
             ';
@@ -189,11 +189,7 @@ class Merchants extends CI_Controller
      function delete_merchants(){
         $id = $this->input->post('id');
         $query = $this->db_model->deleteData('merchants','id',$id);
-        if ($query) {
-          echo 1;
-        }else{
-          echo 0;
-        }
+        echo "Data Deleted";
       }
 }
  ?>
