@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 
  */
-class Merchants extends CI_Controller
+class User extends CI_Controller
 {
 	
 	public function __construct()
@@ -22,23 +22,19 @@ class Merchants extends CI_Controller
 	}
 	
 	public function index(){
-		$data['contents'] = $this->load->view('main/merchants/merchants',null, TRUE);
+		$data['contents'] = $this->load->view('main/users/user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function add(){
-		$data['contents'] = $this->load->view('main/merchants/add_merchants',null, TRUE);
+		$data['contents'] = $this->load->view('main/users/add_user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function edit(){
-		$data['contents'] = $this->load->view('main/merchants/edit_merchants',null, TRUE);
+		$data['contents'] = $this->load->view('main/users/edit_user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function rating(){
-		$data['contents'] = $this->load->view('main/merchants/rating',null, TRUE);
-		$this->load->view('index',$data);
-	}
-	public function gallery(){
-		$data['contents'] = $this->load->view('main/merchants/gallery',null, TRUE);
+		$data['contents'] = $this->load->view('main/users/rating',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	function insert(){
@@ -141,7 +137,7 @@ class Merchants extends CI_Controller
 		$this->session->set_flashdata('response','success');
 		redirect('merchants');
 	}
-	function dt_merchants(){
+	function dt_user(){
 
           // Datatables Variables
           $draw = intval($this->input->get("draw"));
@@ -149,7 +145,7 @@ class Merchants extends CI_Controller
           $length = intval($this->input->get("length"));
 
 
-          $merchants = $this->db_model->getAllData('merchants');
+          $merchants = $this->db_model->getAllData('users');
 
           $data = array();
 
@@ -160,18 +156,15 @@ class Merchants extends CI_Controller
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'customer/edit/'.$r->id.'" target="_blank">Edit</a>
-                <a class="dropdown-item" id="btnHapusMerchants" data-id="'.$r->id.'">Hapus</a>
+                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'user/edit/'.$r->id.'" target="_blank">Edit</a>
+                <a class="dropdown-item" id="btnHapusUser" data-id="'.$r->id.'">Hapus</a>
               </div>
             </div>
             ';
           $data[] = array(
                     $r->name,
-                    $r->min_price,
-                    $r->max_price,
-                    $r->description,
-                    $r->latitude,
-                    $r->longitude,
+                    $r->phone,
+                    $r->email,
                     $r->dateCreated,
                     $button
                );
@@ -186,10 +179,14 @@ class Merchants extends CI_Controller
           echo json_encode($output);
           exit();
      }
-     function delete_merchants(){
+     function delete_user(){
         $id = $this->input->post('id');
         $query = $this->db_model->deleteData('merchants','id',$id);
-        echo "Data Deleted";
+        if ($query) {
+          echo 1;
+        }else{
+          echo 0;
+        }
       }
 }
  ?>

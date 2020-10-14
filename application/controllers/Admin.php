@@ -22,7 +22,7 @@ class Admin extends CI_Controller
 	}
 	
 	public function index(){
-		$data['contents'] = $this->load->view('main/dashboard',null, TRUE);
+		$data['contents'] = $this->load->view('main/admin/admin',null, TRUE);
 		$this->load->view('index',$data);
 	}
     
