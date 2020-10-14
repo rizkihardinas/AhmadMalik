@@ -38,7 +38,10 @@ class Database_model extends CI_Model
 		$query = $this->db->get($table);
 		return $query->result_array();
 	}
-
+	function update($table,$data,$where){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
 	function setInsertData($table,$data){
 		$this->db->insert($table,$data);
 	}
