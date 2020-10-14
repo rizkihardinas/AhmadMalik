@@ -15,8 +15,7 @@ class Database_model extends CI_Model
 	}
 	
 	function getAllData($table){
-		$query = $this->db->get($table);
-		return $query->result_array();
+		return $this->db->get($table);
 	}
 	function getDetailData($table,$column,$id){
 		$this->db->where($column,$id);
@@ -46,6 +45,10 @@ class Database_model extends CI_Model
 	function setUpdateData($table,$id,$id_data,$data){
 		$this->db->where($id, $id_data);
 		$this->db->update($table,$data);
+	}
+	function deleteData($table,$kolom,$id){
+		$this->db->where($kolom,$id);
+		$this->db->delete($table);
 	}
 	function login($email,$password){
 		$this->db->where('email',$email);
