@@ -22,6 +22,11 @@ class Database_model extends CI_Model
 		$query = $this->db->get($table);
 		return $query->result_array();
 	}
+	function countDetailData($table,$data){
+		$this->db->where($data);
+		$query = $this->db->get($table);
+		return $query->num_rows();
+	}
 	function getQuery($q){
 		$query = $this->db->query($q);
 		return $query->result_array();
@@ -73,6 +78,15 @@ class Database_model extends CI_Model
 			GROUP BY merchants.id HAVING jarak <= 50 ORDER BY jarak");
 
 		return $data->result_array();
+	}
+	function getUlasan($idMerchant){
+
+		$this->db->select('users.name,rating.*');
+		$this->db->from('users');
+		$this->db->join('rating','users.id = rating.idUser');
+		$this->db->where('rating.idMerchant',$idMerchant);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 }
  ?>
