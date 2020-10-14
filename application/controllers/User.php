@@ -22,70 +22,42 @@ class User extends CI_Controller
 	}
 	
 	public function index(){
+		$data['judul'] = "Data User";
 		$data['contents'] = $this->load->view('main/users/user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function add(){
+		$data['judul'] = "Add User";
 		$data['contents'] = $this->load->view('main/users/add_user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function edit(){
+		$data['judul'] = "Edit User";
 		$data['contents'] = $this->load->view('main/users/edit_user',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function rating(){
+		$data['judul'] = "Rating from User";
 		$data['contents'] = $this->load->view('main/users/rating',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	function insert(){
-
-		
 		$name = $this->input->post('name');
-		$address  = $this->input->post('address');
-		$min_price = $this->input->post('min_price');
-		$address = $this->input->post('address');
-		$max_price = $this->input->post('max_price');
-		$description = $this->input->post('description');
-		$latLng = $this->input->post('latitude');
+		$phone  = $this->input->post('phone');
+		$email  = $this->input->post('email');
+		$password = $this->input->post('password');
 
-		$latLng = str_replace('LngLat(', '', $latLng);
-		$latLng = str_replace(')', '', $latLng);
-		$dataLatLng = explode(',', $latLng);
-		$latitude = $dataLatLng[0];
-		$longitude = $dataLatLng[1];
+        $data = array(
+			'name' => $name,
+			'phone' => $phone,
+			'email' => $email,
+			'password' => md5($password)
+		);
+        $insert  = $this->db_model->setInsertData('users',$data);
+		$this->session->set_flashdata('msg','Berhasil');
+		$this->session->set_flashdata('response','success');
 		
-		
-		$config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        // $config['max_size']             = 100;
-        // $config['max_width']            = 1024;
-        // $config['max_height']           = 768;
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('customFile'))
-        {
-                $this->session->set_flashdata('msg',$this->upload->display_errors());
-				$this->session->set_flashdata('response','warning');
-        }
-        else
-        {
-                $file = $this->upload->data();
-                $data = array(
-					'name' => $name,
-					'min_price' => $min_price,
-					'max_price' => $max_price,
-					'photo' => $file['file_name'],
-					'description' => $description,
-					'latitude' => $latitude,
-					'longitude' => $longitude
-				);
-                $insert  = $this->db_model->setInsertData('merchants',$data);
-				$this->session->set_flashdata('msg','Berhasil');
-				$this->session->set_flashdata('response','success');
-        }
-		
-		redirect('merchants');
+		redirect('user');
 	}
 	function update(){
 		$name = $this->input->post('name');
@@ -145,7 +117,7 @@ class User extends CI_Controller
           $length = intval($this->input->get("length"));
 
 
-          $merchants = $this->db_model->getAllData('users');
+          $merchants = $this->db_model->getAllDataTable('users');
 
           $data = array();
 
@@ -181,12 +153,8 @@ class User extends CI_Controller
      }
      function delete_user(){
         $id = $this->input->post('id');
-        $query = $this->db_model->deleteData('merchants','id',$id);
-        if ($query) {
-          echo 1;
-        }else{
-          echo 0;
-        }
+        $query = $this->db_model->deleteData('users','id',$id);
+        echo "Data Deleted";
       }
 }
  ?>

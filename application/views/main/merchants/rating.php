@@ -5,7 +5,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="table_all_rating" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>User</th>
@@ -13,22 +13,11 @@
                   <th>Rating</th>
                   <th>Review</th>
                   <th>Data Create</th>
-                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>User</th>
-                  <th>Merchant</th>
-                  <th>Rating</th>
-                  <th>Review</th>
-                  <th>Data Create</th>
-                  <th></th>
-                </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.card-body -->

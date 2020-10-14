@@ -22,23 +22,29 @@ class Merchants extends CI_Controller
 	}
 	
 	public function index(){
+		$data['judul'] = "Data Merchants";
 		$data['contents'] = $this->load->view('main/merchants/merchants',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function add(){
+		$data['judul'] = "Add Merchants";
 		$data['contents'] = $this->load->view('main/merchants/add_merchants',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function edit(){
+		$data['judul'] = "Edit Merchants";
 		$data['contents'] = $this->load->view('main/merchants/edit_merchants',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function rating(){
+		$data['judul'] = "Rating Merchants";
 		$data['contents'] = $this->load->view('main/merchants/rating',null, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function gallery(){
-		$data['contents'] = $this->load->view('main/merchants/gallery',null, TRUE);
+		$data['judul'] = "Gallery Merchants";
+		$data['merchants'] = $this->db_model->getAllData('merchants'); 
+		$data['contents'] = $this->load->view('main/merchants/gallery',$data, TRUE);
 		$this->load->view('index',$data);
 	}
 	function insert(){
@@ -149,7 +155,7 @@ class Merchants extends CI_Controller
           $length = intval($this->input->get("length"));
 
 
-          $merchants = $this->db_model->getAllData('merchants');
+          $merchants = $this->db_model->getAllDataTable('merchants');
 
           $data = array();
 
@@ -181,6 +187,40 @@ class Merchants extends CI_Controller
                "draw" => $draw,
                  "recordsTotal" => $merchants->num_rows(),
                  "recordsFiltered" => $merchants->num_rows(),
+                 "data" => $data
+            );
+          echo json_encode($output);
+          exit();
+     }
+     function dt_rating(){
+
+          // Datatables Variables
+          $draw = intval($this->input->get("draw"));
+          $start = intval($this->input->get("start"));
+          $length = intval($this->input->get("length"));
+
+
+          $rating = $this->db_model->getAllRating();
+
+          $data = array();
+
+          foreach($rating->result() as $r) {
+            $bintang = '
+            <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+            ';
+          $data[] = array(
+                    $r->user,
+                    $r->merchant,
+                    $r->rating,
+                    $r->review,
+                    $r->dateCreated
+               );
+          }
+
+          $output = array(
+               "draw" => $draw,
+                 "recordsTotal" => $rating->num_rows(),
+                 "recordsFiltered" => $rating->num_rows(),
                  "data" => $data
             );
           echo json_encode($output);
