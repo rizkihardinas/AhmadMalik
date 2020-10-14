@@ -2,6 +2,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable Merchants</h3>
+              <?php echo $this->session->flashdata('msg') ?>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
