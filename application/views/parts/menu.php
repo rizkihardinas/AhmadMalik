@@ -69,7 +69,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('') ?>user/user" class="nav-link">
+            <a href="<?php echo base_url('') ?>user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 User
