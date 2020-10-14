@@ -31,6 +31,10 @@
                 <label for="inputDescription">Deskripsi</label>
                 <textarea id="description" class="form-control" name="description" rows="4"></textarea>
               </div>
+              <div class="form-group">
+                <label for="inputAddress">Alamat</label>
+                <textarea id="address" class="form-control" name="address" rows="4"></textarea>
+              </div>
               <div id='map' style='width: 400px; height: 300px;'></div>
             </div>
             <!-- /.card-body -->
@@ -70,6 +74,8 @@
     </section>
     <!-- /.content -->
     <script>
+
+    
     mapboxgl.accessToken = 'pk.eyJ1Ijoicml6a2loYXJkaW5hcyIsImEiOiJja2ZzMGt4MGMwOXg2MnJvMmU3M21vbjZmIn0.RWCidM5bmagDh2oyqh0_SQ';
     var map = new mapboxgl.Map({
     container: 'map',
@@ -80,13 +86,41 @@
     map.on('click', function(e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
-    alert(e.lngLat.toString());
+    $('#latitude').val(e.lngLat);
+    var marker1 = new mapboxgl.Marker();
+    marker1.remove();
 
     var marker = new mapboxgl.Marker();
-    marker.remove();
+    
     marker.setLngLat(e.lngLat);
     marker.addTo(map);
   });
+    $(document).on('click','#save',function(){
+      var name = $('#name').val();
+      var latitude = $('#latitude').val();
+      var longitude = $('#longitude').val();
+      var min_price = $('#min_price').val();
+      var max_price = $('#max_price').val();
+      var address = $('#address').val();
+      var description = $('#description').val();
 
+      var data = {
+          name:name,
+          latitude:latitude,
+          longitude:longitude,
+          min_price:min_price,
+          max_price:max_price,
+          address:address,
+          description:description
+      };
+      $.ajax({
+        url:'<?php echo   base_url('Merchants/insert') ?>',
+        data:data,
+        type:'POST',
+        success:function(data){
+          alert(data);
+        }
+      })
+    });
 
     </script>  

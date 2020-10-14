@@ -41,11 +41,17 @@ class Merchants extends CI_Controller
 
 		
 		$name = $this->input->post('name');
+		$address  = $this->input->post('address');
 		$min_price = $this->input->post('min_price');
 		$max_price = $this->input->post('max_price');
 		$description = $this->input->post('description');
-		$latitude = $this->input->post('latitude');
-		$longitude = $this->input->post('longitude');
+		$latLng = $this->input->post('latitude');
+
+		$latLng = str_replace('LngLat(', '', $latLng);
+		$latLng = str_replace(')', '', $latLng);
+		$dataLatLng = explode(',', $latLng);
+		$latitude = $dataLatLng[0];
+		$longitude = $dataLatLng[1];
 		
 		$data = array(
 			'name' => $name,
@@ -56,7 +62,12 @@ class Merchants extends CI_Controller
 			'longitude' => $longitude
 		);
 
-		$this->db_model->setInsertData('merchants',$data);
+		$insert  = $this->db_model->setInsertData('merchants',$data);
+		if ($insert) {
+			echo 1;
+		}else{
+			echo 0;
+		}
 	}
 }
  ?>
