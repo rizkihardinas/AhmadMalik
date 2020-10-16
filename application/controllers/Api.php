@@ -96,7 +96,6 @@ class Api extends CI_Controller
 			}else{
 				$data = array(
 					'phone' => $phone,
-					'email' => $email,
 					'name' => $name
 				);
 				$this->api->setInsertData('users',$data);
