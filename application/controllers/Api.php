@@ -37,7 +37,7 @@ class Api extends CI_Controller
 		$rating = $this->input->post('rating');
 		$review = $this->input->post('review');
 
-		$check = $this->api->countDetailData("rating",$data);
+		$check = $this->api->countDetailData("rating",array('idUser' =>$idUser));
 		if ($check > 0) {
 			$array = array('code' => 400);
 			echo json_encode($array);
@@ -48,10 +48,55 @@ class Api extends CI_Controller
 				'rating' =>$rating,
 				'review' =>$review
 			);
-			$this->api->setInsert('rating',$dataInsert);
+			$this->api->setInsertData('rating',$dataInsert);
 			$array = array('code' => 200);
 			echo json_encode($array);
 		}
+	}
+	function checkEmail(){
+		$email = $this->input->post('email');
+		$phone = $this->input->post('phone');
+		$name = $this->input->post('name');
+
+		$check = $this->api->countDetailData("users",array('email' => $email));
+		if ($phone == null) {
+			$array = array('code' => 400,'message' => 'No Telp tidak boleh kosong');
+		}else if ($email == '') {
+			$array = array('code' => 400,'message' => 'Email tidak boleh kosong');
+		}else{
+			if ($check > 0) {
+				$dataUser = $this->api->getDetailDatWhere("users",array('email' => $email));
+				$array = array('code' => 200,'data'=> $dataUser);
+			}else{
+				$data = array(
+					'phone' => $phone,
+					'email' => $email,
+					'name' => $name
+				);
+				$this->api->setInsertData('users',$data);
+				$array = array('code' => 200);
+			}
+		}
+		
+		
+		echo json_encode($array);
+	}
+	function checkPhone(){
+		$phone = $this->input->post('phone');
+
+		$check = $this->api->countDetailData("users",array('phone' => $phone));
+		if ($phone == null) {
+			$array = array('code' => 400,'message' => 'No Telp tidak boleh kosong');
+		}else{
+			if ($check > 0) {
+				$array = array('code' => 200);
+			}else{
+				$array = array('code' => 301,'message' => 'No Telp tidak boleh kosong');
+			}
+		}
+		
+		
+		echo json_encode($array);
 	}
 }
  ?>
