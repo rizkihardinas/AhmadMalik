@@ -74,24 +74,33 @@ class Api extends CI_Controller
 					'name' => $name
 				);
 				$this->api->setInsertData('users',$data);
-				$array = array('code' => 200);
+				$array = array('code' => 200,'data'=> $data);
 			}
 		}
 		
 		
 		echo json_encode($array);
 	}
-	function checkPhone(){
+	function checkEmail(){
+		$email = $this->input->post('email');
 		$phone = $this->input->post('phone');
+		$name = $this->input->post('name');
 
 		$check = $this->api->countDetailData("users",array('phone' => $phone));
 		if ($phone == null) {
 			$array = array('code' => 400,'message' => 'No Telp tidak boleh kosong');
 		}else{
 			if ($check > 0) {
-				$array = array('code' => 200);
+				$dataUser = $this->api->getDetailDatWhere("users",array('phone' => $phone));
+				$array = array('code' => 200,'data'=> $dataUser);
 			}else{
-				$array = array('code' => 301,'message' => 'No Telp tidak boleh kosong');
+				$data = array(
+					'phone' => $phone,
+					'email' => $email,
+					'name' => $name
+				);
+				$this->api->setInsertData('users',$data);
+				$array = array('code' => 200,'data'=> $data);
 			}
 		}
 		
