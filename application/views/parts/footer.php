@@ -46,6 +46,7 @@
 <script src="<?php echo base_url('assets/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url('assets/') ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo base_url('assets/') ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
   $(function () {
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {

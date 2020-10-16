@@ -36,7 +36,6 @@
                 <label for="inputAddress">Alamat</label>
                 <textarea id="address" class="form-control" name="address" rows="4"></textarea>
               </div>
-              <div id='map' style='width: 400px; height: 300px;'></div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -54,11 +53,18 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="inputEstimatedBudget">Foto Merchants</label>
+                <label for="customFile">Photo Merchants</label>
                   <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile" name="customFile">
                       <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Merchants Location</label>
+                  <div class="custom-file">
+                    <div id='map' style='width: 485px; height: 300px;'></div>
+                  </div>
               </div>
             </div>
             <!-- /.card-body -->
@@ -82,8 +88,8 @@
     var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-    center: [12.550343, 55.665957], // starting position [lng, lat]
-    zoom: 9 // starting zoom
+    center: [106.826220, -6.172099], // starting position [lng, lat]
+    zoom: 10 // starting zoom
     });
     map.on('click', function(e) {
     // The event object (e) contains information like the
@@ -124,5 +130,8 @@
         }
       })
     });
-
+    
+    $(document).ready(function () {
+      bsCustomFileInput.init();
+    });
     </script>  

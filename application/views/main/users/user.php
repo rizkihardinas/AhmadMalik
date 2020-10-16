@@ -2,7 +2,9 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable Users</h3>
-              <?php echo $this->session->flashdata('msg') ?>
+              <?php echo form_open_multipart('user/add') ?>
+                <input type="submit" value="Add New User" class="btn btn-success float-right">
+              <?php echo form_close() ?>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

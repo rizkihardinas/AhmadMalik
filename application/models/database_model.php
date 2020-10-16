@@ -15,6 +15,10 @@ class Database_model extends CI_Model
 	}
 	
 	function getAllData($table){
+		$query = $this->db->get($table);
+		return $query->result_array();
+	}
+	function getAllDataTable($table){
 		return $this->db->get($table);
 	}
 	function getDetailDatWhere($table,$data){
@@ -89,9 +93,16 @@ class Database_model extends CI_Model
 		$this->db->select('users.name,rating.*');
 		$this->db->from('users');
 		$this->db->join('rating','users.id = rating.idUser');
-		$this->db->where('rating.idMerchant',$idMerchant);
 		$query = $this->db->get();
 		return $query->result_array();
+	}
+	function getAllRating(){
+
+		$this->db->select('users.name as user, merchants.name as merchant,rating.*');
+		$this->db->from('users');
+		$this->db->join('rating','users.id = rating.idUser');
+		$this->db->join('merchants','rating.idMerchant = merchants.id');
+		return $this->db->get();
 	}
 }
  ?>
