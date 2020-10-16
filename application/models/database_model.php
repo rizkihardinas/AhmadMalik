@@ -17,6 +17,11 @@ class Database_model extends CI_Model
 	function getAllData($table){
 		return $this->db->get($table);
 	}
+	function getDetailDatWhere($table,$data){
+		$this->db->where($data);
+		$query = $this->db->get($table);
+		return $query->row_array();
+	}
 	function getDetailData($table,$column,$id){
 		$this->db->where($column,$id);
 		$query = $this->db->get($table);
