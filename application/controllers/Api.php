@@ -37,7 +37,7 @@ class Api extends CI_Controller
 		$rating = $this->input->post('rating');
 		$review = $this->input->post('review');
 
-		$check = $this->api->countDetailData("rating",array('idUser' =>$idUser));
+		$check = $this->api->countDetailData("rating",array('idUser' =>$idUser,'idMerchant' => $idMerchant));
 		if ($check > 0) {
 			$array = array('code' => 400);
 			echo json_encode($array);
@@ -81,8 +81,7 @@ class Api extends CI_Controller
 		
 		echo json_encode($array);
 	}
-	function checkEmail(){
-		$email = $this->input->post('email');
+	function checkPhone(){
 		$phone = $this->input->post('phone');
 		$name = $this->input->post('name');
 
