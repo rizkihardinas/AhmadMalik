@@ -73,8 +73,9 @@ class Api extends CI_Controller
 					'email' => $email,
 					'name' => $name
 				);
-				$this->api->setInsertData('users',$data);
-				$array = array('code' => 200,'data'=> $data);
+				$id = $this->api->setInsertDataGetId('users',$data);
+				$dataUser = $this->api->getDetailDatWhere("id",array('id' => $id));
+				$array = array('code' => 200,'data'=> $dataUser);
 			}
 		}
 		
@@ -83,7 +84,6 @@ class Api extends CI_Controller
 	}
 	function checkPhone(){
 		$phone = $this->input->post('phone');
-		$name = $this->input->post('name');
 
 		$check = $this->api->countDetailData("users",array('phone' => $phone));
 		if ($phone == null) {
@@ -93,16 +93,31 @@ class Api extends CI_Controller
 				$dataUser = $this->api->getDetailDatWhere("users",array('phone' => $phone));
 				$array = array('code' => 200,'data'=> $dataUser);
 			}else{
-				$data = array(
-					'phone' => $phone,
-					'name' => $name
-				);
-				$this->api->setInsertData('users',$data);
-				$array = array('code' => 200,'data'=> $data);
+				$array = array('code' => 301,'message' => 'Data tidak ditemukan');
+				
 			}
 		}
 		
 		
+		echo json_encode($array);
+	}
+	function daftar(){
+		$phone = $this->input->post('phone');
+		$name = $this->input->post('name');
+		$email = $this->input->post('email');
+		if ($phone == null) {
+			$array = array('code' => 400,'message' => 'No Telp tidak boleh kosong');
+		}else if ($email == '') {
+			$array = array('code' => 400,'message' => 'Email tidak boleh kosong');
+		}else{
+			$data = array(
+				'phone' => $phone,
+				'name' => $name
+			);
+			$id = $this->api->setInsertData('users',$data);
+			$array = array('code' => 200,'message'=> 'Daftar berhasil');
+			
+		}
 		echo json_encode($array);
 	}
 }
