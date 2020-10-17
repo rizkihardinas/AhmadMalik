@@ -93,6 +93,7 @@ class Database_model extends CI_Model
 		$this->db->select('users.name,rating.*');
 		$this->db->from('users');
 		$this->db->join('rating','users.id = rating.idUser');
+		$this->db->where('rating.idMerchant',$idMerchant);
 		$query = $this->db->get();
 		return $query->result_array();
 	}
