@@ -59,6 +59,12 @@ class Database_model extends CI_Model
 	function setInsertData($table,$data){
 		$this->db->insert($table,$data);
 	}
+	function setInsertDataGetId($table,$data){
+		$this->db->insert($table, $data); 
+		$last_id = $this->db->insert_id();
+
+		return $last_id;
+	}
 	function setUpdateData($table,$id,$id_data,$data){
 		$this->db->where($id, $id_data);
 		$this->db->update($table,$data);
