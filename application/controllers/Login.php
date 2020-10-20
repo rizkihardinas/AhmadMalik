@@ -13,6 +13,12 @@ class Login extends CI_Controller
 		$this->load->helper('url');
 		$this->load->helper('text');
 		$this->load->model('Constants_model','constants_model');
+
+		if($this->session->userdata('status') != ""){
+			redirect(base_url("admin"));
+		}
+
+		$this->load->library(['encryption']);
 		
 	}
 	
