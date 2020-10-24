@@ -120,5 +120,9 @@ class Api extends CI_Controller
 		}
 		echo json_encode($array);
 	}
+	function getPost(){
+		$post = $this->api->getPost();
+		echo json_encode($post);
+	}
 }
  ?>
