@@ -72,9 +72,13 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link"  href="<?php echo base_url('') ?>login/logout">
+          <i class="fas fa-power-off"></i></a>
+      </li>
+      <!-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
             class="fas fa-th-large"></i></a>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
