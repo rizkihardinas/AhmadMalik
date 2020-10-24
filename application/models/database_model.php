@@ -111,5 +111,12 @@ class Database_model extends CI_Model
 		$this->db->join('merchants','rating.idMerchant = merchants.id');
 		return $this->db->get();
 	}
+	function getPost(){
+		$this->db->select('posts.*,users.name as user');
+		$this->db->from('posts');
+		$this->db->join('users','posts.idUser = users.id');
+		$this->db->order_by('posts.id','DESC');
+		return $this->db->get()->result_array();
+	}
 }
  ?>
