@@ -26,6 +26,19 @@
                 "type": "POST"
             },
         });
+        $('#table_all_post').DataTable({
+            "pageLength" : 10,
+            lengthChange: false,
+            autoWidth: false,
+            dom: 'Bfrtip',
+            buttons: [
+                { extend:'excel', attr: { id: 'allan' } }, 'pdf', 'print'
+            ],
+            "ajax": {
+                url:'<?php echo base_url() ?>posts/dt_posts',
+                "type": "POST"
+            },
+        });
         $('#table_all_admin').DataTable({
             "pageLength" : 10,
             lengthChange: false,

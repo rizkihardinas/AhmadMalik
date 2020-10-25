@@ -69,6 +69,29 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Artikel
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url('') ?>posts/add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('') ?>posts" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="<?php echo base_url('') ?>user" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -120,7 +143,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
+              <li class="breadcrumb-item active"><?php echo ucwords($this->uri->segment(1)) ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
