@@ -1,7 +1,7 @@
 
     <!-- Main content -->
+  <?php echo form_open_multipart('posts/update/') ?>
     <section class="content">
-      <?php echo form_open_multipart('posts/update/') ?>
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">

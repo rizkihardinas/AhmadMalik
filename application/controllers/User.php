@@ -31,9 +31,10 @@ class User extends CI_Controller
 		$data['contents'] = $this->load->view('main/users/add_user',null, TRUE);
 		$this->load->view('index',$data);
 	}
-	public function edit(){
+	public function edit($id){
 		$data['judul'] = "Edit User";
-		$data['contents'] = $this->load->view('main/users/edit_user',null, TRUE);
+		$data['users'] = $this->db_model->getDetailDatWhere('users',array('id'=>$id));
+		$data['contents'] = $this->load->view('main/users/edit_user',$data, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function rating(){
@@ -59,56 +60,39 @@ class User extends CI_Controller
 		
 		redirect('user');
 	}
+	
 	function update(){
-		$name = $this->input->post('name');
 		$id = $this->input->post('id');
-		$address  = $this->input->post('address');
-		$min_price = $this->input->post('min_price');
-		$address = $this->input->post('address');
-		$max_price = $this->input->post('max_price');
-		$description = $this->input->post('description');
-		$latLng = $this->input->post('latitude');
-
-		$latLng = str_replace('LngLat(', '', $latLng);
-		$latLng = str_replace(')', '', $latLng);
-		$dataLatLng = explode(',', $latLng);
-		$latitude = $dataLatLng[0];
-		$longitude = $dataLatLng[1];
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$email = $this->input->post('email');
 		
-		
-		
-        if ($this->input->post('customFile')) {
-        	$config['upload_path']          = './uploads/';
-	        $config['allowed_types']        = 'gif|jpg|png';
-	        // $config['max_size']             = 100;
-	        // $config['max_width']            = 1024;
-	        // $config['max_height']           = 768;
-	        $this->load->library('upload', $config);
-
-	        if ( ! $this->upload->do_upload('customFile'))
-	        {
-	                $this->session->set_flashdata('msg',$this->upload->display_errors());
-					$this->session->set_flashdata('response','warning');
-	        }
-	        else
-	        {
-	                $file = $this->upload->data();
-	                $data['photo'] = $file['file_name'];
-	        }
-        }
-        $data = array(
+		$data = array(
+			'id' => $id,
 			'name' => $name,
-			'min_price' => $min_price,
-			'max_price' => $max_price,
-			'description' => $description,
-			'latitude' => $latitude,
-			'longitude' => $longitude
+			'phone' => $phone,
+			'email' => $email
 		);
-       	$this->db_model->update('merchants',$data,array('id'=>$id));
+       	$this->db_model->update('users',$data,array('id'=>$id));
 		$this->session->set_flashdata('msg','Update Berhasil!');
 		$this->session->set_flashdata('response','success');
-		redirect('merchants');
+		redirect('user');
 	}
+
+	function update_password(){
+		$id = $this->input->post('id');
+		$password = $this->input->post('password');
+		
+		$data = array(
+			'id' => $id,
+			'password' => md5($password)
+		);
+       	$this->db_model->update('users',$data,array('id'=>$id));
+		$this->session->set_flashdata('msg','Update Berhasil!');
+		$this->session->set_flashdata('response','success');
+		redirect('user');
+	}
+
 	function dt_user(){
 
           // Datatables Variables
