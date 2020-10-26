@@ -45,14 +45,13 @@ class Login extends CI_Controller
 				'username' => $username,
 				'status' => "login"
 				);
-		    }
 
 			$this->session->set_userdata($data_session);
- 
-			redirect(base_url("admin"));
+		    }
+			echo 1;
  
 		}else{
-			echo $where;
+			echo 0;
 		}
 	}
 
