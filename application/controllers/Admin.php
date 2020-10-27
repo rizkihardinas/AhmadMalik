@@ -46,6 +46,12 @@ class Admin extends CI_Controller
 		$data['contents'] = $this->load->view('main/admin/access_admin',null, TRUE);
 		$this->load->view('index',$data);
 	}
+	public function profile(){
+
+		$data['judul'] = "Profile Admin";
+		$data['contents'] = $this->load->view('main/admin/profile',null, TRUE);
+		$this->load->view('index',$data);
+	}
 	function insert(){
 		$name = $this->input->post('name');
 		$username  = $this->input->post('username');

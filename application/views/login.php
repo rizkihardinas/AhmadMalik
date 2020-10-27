@@ -29,7 +29,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Sign in to start your session <?php echo $this->session->userdata("name"); ?> <?php echo $this->session->userdata("status"); ?></p>
 
       <div id="gagal" style="color:red; display: none;">Username atau Password Salah</div>
       <form method="post">
@@ -87,7 +87,12 @@
             data : data,
             success: function(data)
             {
-              alert(data);
+              if (data == 1) {
+                window.location.href = "<?php echo base_url() ?>admin";
+              }else{
+                document.getElementById('gagal').style.display = 'block';
+              }
+
             }
         });
     });

@@ -14,7 +14,7 @@
           <img src="<?php echo base_url('assets/') ?>img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Andi Malik</a>
+          <a href="<?php echo base_url('') ?>admin/profile" class="d-block"><?php echo $this->session->userdata("name"); ?></a>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-comment"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Artikel
                 <i class="fas fa-angle-left right"></i>
@@ -93,7 +93,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('') ?>user" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 User
               </p>
@@ -102,9 +102,9 @@
           <li class="nav-header">ADMIN</li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon far fa-user-circle"></i>
               <p>
-                User Admin
+                Admin Account
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

@@ -23,9 +23,12 @@ class Dashboard extends CI_Controller
 	}
 	
 	public function index(){
+		$data['jumlah_merchants']=$this->db->query('SELECT id FROM merchants')->num_rows();
+		$data['jumlah_users']=$this->db->query('SELECT id FROM users')->num_rows();
+		$data['jumlah_artikels']=$this->db->query('SELECT id FROM posts')->num_rows();
 
 		$data['judul'] = "Dashboard";
-		$data['contents'] = $this->load->view('main/dashboard',null, TRUE);
+		$data['contents'] = $this->load->view('main/dashboard',$data, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function add(){

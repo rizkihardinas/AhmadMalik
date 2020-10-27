@@ -72,7 +72,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  href="<?php echo base_url('') ?>login/logout">
+        <a class="nav-link"  href="<?php echo base_url() ?>login/logout">
           <i class="fas fa-power-off"></i></a>
       </li>
       <!-- <li class="nav-item">

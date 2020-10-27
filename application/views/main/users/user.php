@@ -1,4 +1,6 @@
-<div class="col-12">
+<section class="content">
+<div class="row">
+  <div class="col-12">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable Users</h3>
@@ -26,3 +28,6 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+        </div>
+      </div>
+    </section>

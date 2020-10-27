@@ -14,9 +14,6 @@ class Login extends CI_Controller
 		$this->load->helper('text');
 		$this->load->model('Constants_model','constants_model');
 
-		if($this->session->userdata('status') != ""){
-			redirect(base_url("admin"));
-		}
 
 		$this->load->library(['encryption']);
 		
@@ -57,7 +54,7 @@ class Login extends CI_Controller
 
 	function logout(){
 		$this->session->sess_destroy();
-		redirect(base_url('login'));
+		redirect();
 	}
 }
  ?>

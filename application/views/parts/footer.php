@@ -35,10 +35,15 @@
 <!-- AdminLTE -->
 <script src="<?php echo base_url('assets/') ?>js/adminlte.js"></script>
 
+<!-- daterangepicker -->
+<script src="<?php echo base_url('assets/') ?>plugins/moment/moment.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- OPTIONAL SCRIPTS -->
 <script src="<?php echo base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
 <script src="<?php echo base_url('assets/') ?>js/demo.js"></script>
-<script src="<?php echo base_url('assets/') ?>js/pages/dashboard3.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/pages/dashboard.js"></script>
+
 <!-- Filterizr-->
 <script src="<?php echo base_url('assets/') ?>plugins/filterizr/jquery.filterizr.min.js"></script>
 
@@ -61,7 +66,9 @@
       $('.btn[data-filter]').removeClass('active');
       $(this).addClass('active');
     });
+    
   })
+
 </script>
 </body>
 </html>
