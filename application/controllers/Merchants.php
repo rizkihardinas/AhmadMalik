@@ -160,6 +160,9 @@ class Merchants extends CI_Controller
           $data = array();
 
           foreach($merchants->result() as $r) {
+          	$photo = '<img src="'.base_url().'uploads/'.$r->photo.'" class="img-circle img-size-32 mr-2">';
+            $lokasi = $r->latitude.' - '.$r->longitude;
+
             $button = '
             <div class="dropdown">
               <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -172,12 +175,12 @@ class Merchants extends CI_Controller
             </div>
             ';
           $data[] = array(
+                    $photo,
                     $r->name,
                     $r->min_price,
                     $r->max_price,
                     $r->description,
-                    $r->latitude,
-                    $r->longitude,
+                    $lokasi,
                     $r->dateCreated,
                     $button
                );
@@ -205,13 +208,25 @@ class Merchants extends CI_Controller
           $data = array();
 
           foreach($rating->result() as $r) {
-            $bintang = '
-            <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-            ';
+          	if ($r->rating == 1) {
+          		$bintang = '<i class="fas fa-star text-warning"></i>';
+          	}elseif ($r->rating == 2	) {
+          		$bintang = '<i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>';
+          	}elseif ($r->rating == 3	) {
+          		$bintang = '<i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>';
+          	}elseif ($r->rating == 4	) {
+          		$bintang = '<i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>';
+          	}elseif ($r->rating == 5	) {
+          		$bintang = '<i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>';
+          	}else{
+          		$bintang = 'Error';
+          	}
+                        
+            
           $data[] = array(
                     $r->user,
                     $r->merchant,
-                    $r->rating,
+                    $bintang,
                     $r->review,
                     $r->dateCreated
                );

@@ -71,30 +71,41 @@
                 <!-- Conversations are loaded here -->
                 <div class="direct-chat-messages">
                   <!-- Message. Default to the left -->
+                  <?php 
+                  foreach ($last_rating as $lr) {
+                    
+                    ?>
+
+
                   <div class="direct-chat-msg">
                     <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                      <span class="direct-chat-name float-left"><?php echo $lr['user']; ?></span>
+                      <span class="direct-chat-timestamp float-right"><?php echo $lr['dateCreated']; ?></span>
                     </div>
                     <!-- /.direct-chat-infos -->
                     <img class="direct-chat-img" src="<?php echo base_url('assets/') ?>img/user1-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!<br>
+                      <?php echo $lr['review']; ?><br>
 
                     <div class="direct-chat-infos clearfix">
                       <span class="direct-chat-name float-left">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
+                        <?php 
+                          $r = $lr['rating'];
+                          for ($i=0; $i < $r; $i++) { 
+                           echo '<i class="fas fa-star text-warning"></i>'; 
+                          }
+                         ?>
                       </span>
-                      <span class="direct-chat-timestamp float-right">Merchants Vapes</span>
+                      <span class="direct-chat-timestamp float-right"><?php echo $lr['merchant']; ?></span>
                       </div>
                     </div>
                     <!-- /.direct-chat-text -->
                   </div>
+
+                    <?php
+                  }
+                   ?>
                   <!-- /.direct-chat-msg -->
 
 
@@ -131,22 +142,37 @@
                   <tr>
                     <th>Merchants</th>
                     <th>Rating</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                  foreach ($top_merchant as $tm) {
+                    
+                    ?>
                   <tr>
                     <td>
-                      <img src="<?php echo base_url('uploads/') ?>logo_bg_black6.jpg" class="img-circle img-size-32 mr-2">
-                      Some Product
+                      <img src="<?php echo base_url('uploads/') ?><?php echo $tm['photo']; ?>" class="img-circle img-size-32 mr-2">
+                      <?php echo $tm['name']; ?>
                     </td>
                     <td>
-                      <i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-warning"></i>
-                      <i class="fas fa-star text-warning"></i>
+                      <?php 
+                      $count = $tm['count'];
+                      $rate = $tm['rate']/$count;
+                        $r = $rate;
+                        for ($i=0; $i < $r; $i++) { 
+                         echo '<i class="fas fa-star text-warning"></i>'; 
+                        }
+                      ?>
+                    </td>
+                    <td>
+                      <?php echo $rate; ?>
                     </td>
                   </tr>
+
+                    <?php
+                  }
+                   ?>
                   </tbody>
                 </table>
               </div>

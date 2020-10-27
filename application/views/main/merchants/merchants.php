@@ -9,12 +9,12 @@
               <table id="table_all_merchant" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th>Photo</th>
                   <th>Nama</th>
                   <th>Min Price</th>
                   <th>Max Price</th>
                   <th>Description</th>
-                  <th>Latitude</th>
-                  <th>Longitude</th>
+                  <th>Latitude - Longitude</th>
                   <th>Data Create</th>
                   <th></th>
                 </tr>

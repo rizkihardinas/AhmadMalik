@@ -27,6 +27,10 @@ class Dashboard extends CI_Controller
 		$data['jumlah_users']=$this->db->query('SELECT id FROM users')->num_rows();
 		$data['jumlah_artikels']=$this->db->query('SELECT id FROM posts')->num_rows();
 
+		$data['last_rating'] = $this->db_model->getQuery("SELECT rating.*, users.name as user, merchants.name as merchant FROM users INNER JOIN (rating INNER JOIN merchants ON rating.idMerchant=merchants.id) ON users.id=rating.idUser ORDER BY rating.id DESC LIMIT 10");
+
+		$data['top_merchant'] = $this->db_model->getQuery("SELECT rating.idMerchant, merchants.name, SUM(rating.rating) as rate, COUNT(rating.id) as count, merchants.photo FROM rating INNER JOIN merchants ON rating.idMerchant=merchants.id GROUP BY rating.idMerchant");
+
 		$data['judul'] = "Dashboard";
 		$data['contents'] = $this->load->view('main/dashboard',$data, TRUE);
 		$this->load->view('index',$data);
