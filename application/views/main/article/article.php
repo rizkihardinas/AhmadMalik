@@ -9,6 +9,7 @@
       <table id="table_all_post" class="table table-bordered table-hover">
         <thead>
         <tr>
+          <th>Artikel</th>
           <th>Judul</th>
           <th>Artikel</th>
           <th></th>

@@ -88,7 +88,7 @@
             success: function(data)
             {
               if (data == 1) {
-                window.location.href = "<?php echo base_url() ?>admin";
+                window.location.href = "<?php echo base_url() ?>dashboard";
               }else{
                 document.getElementById('gagal').style.display = 'block';
               }
