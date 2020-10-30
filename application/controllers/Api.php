@@ -132,5 +132,8 @@ class Api extends CI_Controller
 		$post = $this->api->getMaxPriceStore();
 		echo json_encode($post);
 	}
+	function test(){
+		
+	}
 }
  ?>
