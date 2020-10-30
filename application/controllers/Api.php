@@ -124,5 +124,13 @@ class Api extends CI_Controller
 		$post = $this->api->getPost();
 		echo json_encode($post);
 	}
+	function getMinPriceStore(){
+		$post = $this->api->getMinPriceStore();
+		echo json_encode($post);
+	}
+	function getMaxPriceStore(){
+		$post = $this->api->getMaxPriceStore();
+		echo json_encode($post);
+	}
 }
  ?>
