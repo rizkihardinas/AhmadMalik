@@ -45,10 +45,11 @@ class Login extends CI_Controller
 
 			$this->session->set_userdata($data_session);
 		    }
-			echo 1;
- 
+			redirect('dashboard','refresh');
+ 		
 		}else{
-			echo 0;
+			$this->session->set_flashdata('error', 'Username atau password salah');
+			redirect('login');
 		}
 	}
 

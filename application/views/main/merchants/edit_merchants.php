@@ -17,9 +17,8 @@
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
                 <input type="hidden" name="id" class="form-control" value="<?php echo $merchant['id'] ?>">
+                <input type="hidden" id="latitude" name="latitude" class="form-control" value="LngLat(<?php echo $merchant['longitude'] ?>, <?php echo $merchant['latitude'] ?>)">
                 <input type="text" id="name" name="name" class="form-control" value="<?php echo $merchant['name'] ?>">
-                <input type="hidden" id="latitude" name="latitude" value="<?php echo $merchant['latitude'] ?>" class="form-control" >
-                <input type="text" id="longitude" name="longitude" value="<?php echo $merchant['longitude'] ?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputClientCompany">Harga Terendah</label>
@@ -85,14 +84,17 @@
     <!-- /.content -->
     <script>
 
-    
+    var latlong = [<?php echo $merchant['longitude'] ?>,<?php echo $merchant['latitude'] ?>];
     mapboxgl.accessToken = 'pk.eyJ1Ijoicml6a2loYXJkaW5hcyIsImEiOiJja2ZzMGt4MGMwOXg2MnJvMmU3M21vbjZmIn0.RWCidM5bmagDh2oyqh0_SQ';
     var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-    center: [106.826220, -6.172099], // starting position [lng, lat]
+    center: latlong, // starting position [lng, lat]
     zoom: 10 // starting zoom
     });
+    var marker = new mapboxgl.Marker()
+    .setLngLat(latlong)
+    .addTo(map);
     map.on('click', function(e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
