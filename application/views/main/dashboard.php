@@ -163,7 +163,7 @@
                       ?>
                     </td>
                     <td>
-                      <?php echo $rate; ?>
+                      <?php echo substr($rate, 0,3); ?>
                     </td>
                   </tr>
 
