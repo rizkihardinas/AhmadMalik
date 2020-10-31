@@ -31,8 +31,9 @@ class Merchants extends CI_Controller
 		$data['contents'] = $this->load->view('main/merchants/add_merchants',null, TRUE);
 		$this->load->view('index',$data);
 	}
-	public function edit(){
+	public function edit($id){
 		$data['judul'] = "Edit Merchants";
+		$data['users'] = $this->db_model->getDetailDatWhere('merchants',array('id'=>$id));
 		$data['contents'] = $this->load->view('main/merchants/edit_merchants',null, TRUE);
 		$this->load->view('index',$data);
 	}
@@ -45,6 +46,12 @@ class Merchants extends CI_Controller
 		$data['judul'] = "Gallery Merchants";
 		$data['merchants'] = $this->db_model->getAllData('merchants'); 
 		$data['contents'] = $this->load->view('main/merchants/gallery',$data, TRUE);
+		$this->load->view('index',$data);
+	}
+	public function profile($id){
+		$data['judul'] = "Profile Merchants";
+		$data['merchant'] = $this->db_model->getDetailDatWhere('merchants',array('id'=>$id));
+		$data['contents'] = $this->load->view('main/merchants/profile_merchants',$data, TRUE);
 		$this->load->view('index',$data);
 	}
 	function insert(){

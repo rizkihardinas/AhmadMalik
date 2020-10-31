@@ -7,19 +7,19 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="<?php echo base_url('assets/') ?>img/admin.png"
+                       src="<?php echo base_url('assets/') ?>img/user<?php echo $merchant['rating'] ?>.jpg"
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center"><?php echo $this->session->userdata("name"); ?> <span style="color:#777;">(<?php echo $this->session->userdata("username"); ?>)</span></h3>
+                <h3 class="profile-username text-center"><?php echo $merchant['name'] ?> <span style="color:#777;"></span></h3>
 
                 <p class="text-muted text-center">Admin</p>
 
-                <!-- <ul class="list-group list-group-unbordered mb-3">
+                <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
+                    <b>Harga Terendah</b> <a class="float-right"><?php echo $merchant['id'] ?></a>
                   </li>
-                </ul> -->
+                </ul>
 
                 <a href="<?php echo base_url('') ?>admin/edit/<?php echo $this->session->userdata("id"); ?>" class="btn btn-primary btn-block"><b>Edit</b></a>
               </div>
