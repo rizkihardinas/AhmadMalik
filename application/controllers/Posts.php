@@ -119,7 +119,7 @@ class Posts extends CI_Controller
           	$photo = '<img src="'.base_url().'uploads/posts/'.$r->foto.'" class="img-circle img-size-32 mr-2">';
             $button = '
             <div class="dropdown">
-              <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="btn btn-sm btn-icon-only" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">

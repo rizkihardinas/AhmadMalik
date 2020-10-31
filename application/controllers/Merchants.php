@@ -33,8 +33,8 @@ class Merchants extends CI_Controller
 	}
 	public function edit($id){
 		$data['judul'] = "Edit Merchants";
-		$data['users'] = $this->db_model->getDetailDatWhere('merchants',array('id'=>$id));
-		$data['contents'] = $this->load->view('main/merchants/edit_merchants',null, TRUE);
+		$data['merchant'] = $this->db_model->getDetailDatWhere('merchants',array('id'=>$id));
+		$data['contents'] = $this->load->view('main/merchants/edit_merchants',$data, TRUE);
 		$this->load->view('index',$data);
 	}
 	public function rating(){
@@ -50,7 +50,7 @@ class Merchants extends CI_Controller
 	}
 	public function profile($id){
 		$data['judul'] = "Profile Merchants";
-		$data['merchant'] = $this->db_model->getDetailDatWhere('merchants',array('id'=>$id));
+		$data['merchant'] = $this->db_model->getQuery("SELECT merchants.*, SUM(rating.rating) as rate, COUNT(rating.id) as count FROM merchants INNER JOIN rating ON merchants.id=rating.idMerchant WHERE merchants.id='".$id."'");
 		$data['contents'] = $this->load->view('main/merchants/profile_merchants',$data, TRUE);
 		$this->load->view('index',$data);
 	}
@@ -58,7 +58,6 @@ class Merchants extends CI_Controller
 
 		
 		$name = $this->input->post('name');
-		$address  = $this->input->post('address');
 		$min_price = $this->input->post('min_price');
 		$address = $this->input->post('address');
 		$max_price = $this->input->post('max_price');
@@ -94,6 +93,7 @@ class Merchants extends CI_Controller
 					'max_price' => $max_price,
 					'photo' => $file['file_name'],
 					'description' => $description,
+					'address' => $address,
 					'latitude' => $latitude,
 					'longitude' => $longitude
 				);
@@ -107,7 +107,6 @@ class Merchants extends CI_Controller
 	function update(){
 		$name = $this->input->post('name');
 		$id = $this->input->post('id');
-		$address  = $this->input->post('address');
 		$min_price = $this->input->post('min_price');
 		$address = $this->input->post('address');
 		$max_price = $this->input->post('max_price');
@@ -146,6 +145,7 @@ class Merchants extends CI_Controller
 			'min_price' => $min_price,
 			'max_price' => $max_price,
 			'description' => $description,
+			'address' => $address,
 			'latitude' => $latitude,
 			'longitude' => $longitude
 		);
@@ -167,16 +167,17 @@ class Merchants extends CI_Controller
           $data = array();
 
           foreach($merchants->result() as $r) {
-          	$photo = '<img src="'.base_url().'uploads/'.$r->photo.'" class="img-circle img-size-32 mr-2">';
-            $lokasi = $r->latitude.' - '.$r->longitude;
+          	$photo = '<a href="'. base_url().'merchants/profile/'.$r->id.'"><img src="'.base_url().'uploads/'.$r->photo.'" class="img-circle img-size-32 mr-2"></a>';
+            $lokasi = $r->address.' <br> '.$r->latitude.' - '.$r->longitude;
 
             $button = '
             <div class="dropdown">
-              <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="btn btn-sm btn-icon-only" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'customer/edit/'.$r->id.'" target="_blank">Edit</a>
+                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'merchants/profile/'.$r->id.'" >Cek Detail</a>
+                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'merchants/edit/'.$r->id.'" >Edit</a>
                 <a class="dropdown-item" id="btnHapusMerchants" data-id="'.$r->id.'">Hapus</a>
               </div>
             </div>

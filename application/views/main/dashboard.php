@@ -163,7 +163,7 @@
                       ?>
                     </td>
                     <td>
-                      <?php echo $rate; ?>
+                      <?php echo round($rate,1); ?>
                     </td>
                   </tr>
 

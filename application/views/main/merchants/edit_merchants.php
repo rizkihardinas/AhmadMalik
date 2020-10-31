@@ -1,7 +1,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <?php echo form_open_multipart('Merchants/insert/') ?>
+      <?php echo form_open_multipart('Merchants/update/') ?>
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">
@@ -16,27 +16,28 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
-                <input type="text" id="name" name="name" class="form-control">
-                <input type="hidden" id="latitude" name="latitude" class="form-control">
-                <input type="hidden" id="longitude" name="longitude" class="form-control">
+                <input type="hidden" name="id" class="form-control" value="<?php echo $merchant['id'] ?>">
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo $merchant['name'] ?>">
+                <input type="hidden" id="latitude" name="latitude" value="<?php echo $merchant['latitude'] ?>" class="form-control" >
+                <input type="text" id="longitude" name="longitude" value="<?php echo $merchant['longitude'] ?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputClientCompany">Harga Terendah</label>
-                <input type="text" id="min_price" name="min_price" class="form-control">
+                <input type="text" id="min_price" name="min_price" class="form-control" value="<?php echo $merchant['min_price'] ?>">
               </div>
               <div class="form-group">
                 <label for="inputProjectLeader">Harga Tertinggi</label>
-                <input type="text" id="max_price" name="max_price" class="form-control">
+                <input type="text" id="max_price" name="max_price" class="form-control" value="<?php echo $merchant['max_price'] ?>">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Deskripsi</label>
-                <textarea id="description" class="form-control" name="description" rows="4"></textarea>
+                <textarea class="textarea" id="description" name="description" placeholder="Place some text here" 
+                          style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" ><?php echo $merchant['description'] ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputAddress">Alamat</label>
-                <textarea id="address" class="form-control" name="address" rows="4"></textarea>
+                <textarea id="address" class="form-control" name="address" rows="4"> <?php echo $merchant['address'] ?></textarea>
               </div>
-              <div id='map' style='width: 400px; height: 300px;'></div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -54,11 +55,18 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="inputEstimatedBudget">Foto Merchants</label>
+                <label for="customFile">Photo Merchants</label>
                   <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile" name="customFile">
                       <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Merchants Location</label>
+                  <div class="custom-file">
+                    <div id='map' style='width: 485px; height: 300px;'></div>
+                  </div>
               </div>
             </div>
             <!-- /.card-body -->
@@ -69,7 +77,7 @@
       <div class="row">
         <div class="col-12">
           <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Merchants" class="btn btn-success float-right">
+          <input type="submit" value="Update" class="btn btn-success float-right">
         </div>
       </div>
     </section>
@@ -82,8 +90,8 @@
     var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-    center: [12.550343, 55.665957], // starting position [lng, lat]
-    zoom: 9 // starting zoom
+    center: [106.826220, -6.172099], // starting position [lng, lat]
+    zoom: 10 // starting zoom
     });
     map.on('click', function(e) {
     // The event object (e) contains information like the
@@ -124,5 +132,8 @@
         }
       })
     });
-
+    
+    $(document).ready(function () {
+      bsCustomFileInput.init();
+    });
     </script>  

@@ -15,10 +15,12 @@ class Database_model extends CI_Model
 	}
 	
 	function getAllData($table){
+		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($table);
 		return $query->result_array();
 	}
 	function getAllDataTable($table){
+		$this->db->order_by('id', 'DESC');
 		return $this->db->get($table);
 	}
 	function getDetailDatWhere($table,$data){
@@ -95,7 +97,6 @@ class Database_model extends CI_Model
 		return $data->result_array();
 	}
 	function getUlasan($idMerchant){
-
 		$this->db->select('users.name,rating.*');
 		$this->db->from('users');
 		$this->db->join('rating','users.id = rating.idUser');
@@ -118,5 +119,6 @@ class Database_model extends CI_Model
 		$this->db->order_by('posts.id','DESC');
 		return $this->db->get()->result_array();
 	}
+
 }
  ?>
