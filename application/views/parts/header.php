@@ -1,3 +1,33 @@
+<?php 
+function time_elapsed_string($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,20 +85,41 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">12</span>
+          <?php 
+
+          $notif = $this->db->query("SELECT COUNT(idJenis) as jenis FROM notifikasi")->row_array();
+
+           ?>
+          <span class="badge badge-warning navbar-badge"><?php echo $notif['jenis'] ?></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">12 Notifications</span>
+          <span class="dropdown-item dropdown-header"><?php echo $notif['jenis'] ?> Notifikasi</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 add new rating
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 new user
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
+          <?php 
+          $query = $this->db->query("SELECT *,COUNT(idJenis) as jenis FROM notifikasi GROUP BY idJenis");
+          if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $data) {
+              if ($data['idJenis'] == 2) {
+                $icon = "fa-envelope ";
+              }else{
+                $icon ="fa-users";
+              }
+            
+          
+           ?>
+           <a href="#" class="dropdown-item">
+              <i class="fas <?php echo $icon ?> mr-2"></i> <?php echo $data['jenis'] ?> <?php echo $data['description'] ?>
+              <span class="float-right text-muted text-sm">
+                <?php echo time_elapsed_string($data['dateCreated']) ?>
+              </span>
+            </a>
+            <div class="dropdown-divider"></div>
+           <?php 
+           }
+          }
+            ?>
+          
+          
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>

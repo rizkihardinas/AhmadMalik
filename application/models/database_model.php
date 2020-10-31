@@ -91,7 +91,7 @@ class Database_model extends CI_Model
 			SELECT 
 			merchants.*, 
 			round(  ( 6371  * acos( least(1.0,cos( radians(".$latitude.") )* cos( radians(merchants.latitude) ) * cos( radians(merchants.longitude) - radians(".$longitude.") ) + sin( radians(".$latitude.") ) * sin( radians(merchants.latitude) ) ) )), 1) as jarak, IFNULL(SUM(rating.rating),0) as rating, COUNT(idUser) as reviewer
-			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant WHERE merchants.min_price >= ".$min_price." AND merchants.max_price <= ".$max_price."
+			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant WHERE (merchants.min_price BETWEEN ".$min_price." AND ".$max_price.") OR (merchants.max_price BETWEEN ".$min_price." AND ".$max_price.")
 			GROUP BY merchants.id HAVING jarak <= 50 ORDER BY jarak");
 
 		return $data->result_array();
@@ -119,6 +119,17 @@ class Database_model extends CI_Model
 		$this->db->order_by('posts.id','DESC');
 		return $this->db->get()->result_array();
 	}
-
+	function getMinPriceStore(){
+		$query = $this->db->query("SELECT MIN(min_price) as minPrice FROM merchants");
+		return $query->row_array();
+	}
+	function getMaxPriceStore(){
+		$query = $this->db->query("SELECT MAX(max_price) as maxPrice FROM merchants");
+		return $query->row_array();
+	}
+	function getNotif(){
+		$query = $this->db->query("SELECT *,COUNT(idJenis) as jenis FROM notifikasi WHERE dateCreated BETWEEN DATE(NOW()) + INTERVAL -7 DAY AND CURRENT_DATE GROUP BY idJenis");
+		return $query->result_array();
+	}
 }
  ?>
