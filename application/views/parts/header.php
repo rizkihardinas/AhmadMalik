@@ -87,7 +87,7 @@ function time_elapsed_string($datetime, $full = false) {
           <i class="far fa-bell"></i>
           <?php 
 
-          $notif = $this->db->query("SELECT COUNT(idJenis) as jenis FROM notifikasi WHERE dateCreated BETWEEN DATE(NOW()) + INTERVAL -7 DAY AND CURRENT_DATE")->row_array();
+          $notif = $this->db->query("SELECT COUNT(idJenis) as jenis FROM notifikasi")->row_array();
 
            ?>
           <span class="badge badge-warning navbar-badge"><?php echo $notif['jenis'] ?></span>
@@ -96,7 +96,7 @@ function time_elapsed_string($datetime, $full = false) {
           <span class="dropdown-item dropdown-header"><?php echo $notif['jenis'] ?> Notifikasi</span>
           <div class="dropdown-divider"></div>
           <?php 
-          $query = $this->db->query("SELECT *,COUNT(idJenis) as jenis FROM notifikasi WHERE dateCreated BETWEEN DATE(NOW()) + INTERVAL -7 DAY AND CURRENT_DATE GROUP BY idJenis");
+          $query = $this->db->query("SELECT *,COUNT(idJenis) as jenis FROM notifikasi GROUP BY idJenis");
           if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $data) {
               if ($data['idJenis'] == 2) {
