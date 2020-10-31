@@ -100,14 +100,16 @@ function time_elapsed_string($datetime, $full = false) {
           if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $data) {
               if ($data['idJenis'] == 2) {
-                $icon = "fa-envelope ";
+                $link = "merchants/rating";
+                $icon = "fa-star";
               }else{
+                $link = "user";
                 $icon ="fa-users";
               }
             
           
            ?>
-           <a href="#" class="dropdown-item">
+           <a href="<?php echo base_url($link) ?>" class="dropdown-item">
               <i class="fas <?php echo $icon ?> mr-2"></i> <?php echo $data['jenis'] ?> <?php echo $data['description'] ?>
               <span class="float-right text-muted text-sm">
                 <?php echo time_elapsed_string($data['dateCreated']) ?>
@@ -121,7 +123,7 @@ function time_elapsed_string($datetime, $full = false) {
           
           
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="<?php echo base_url() ?>dashboard/clear_notif" class="dropdown-item dropdown-footer">Clear Notifications</a>
         </div>
       </li>
       <li class="nav-item">

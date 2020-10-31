@@ -58,6 +58,9 @@
                   <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile" name="customFile">
                       <label class="custom-file-label" for="customFile">Choose file</label>
+                      <span class="text-sm mb-0" style="color:#888;">
+                        Photo resolution 300x300 pixel
+                      </span>
                     </div>
               </div>
 
@@ -84,7 +87,7 @@
     <!-- /.content -->
     <script>
 
-    var latlong = [<?php echo $merchant['longitude'] ?>,<?php echo $merchant['latitude'] ?>];
+    var latlong = [<?php echo $merchant['latitude'] ?>,<?php echo $merchant['longitude'] ?>];
     mapboxgl.accessToken = 'pk.eyJ1Ijoicml6a2loYXJkaW5hcyIsImEiOiJja2ZzMGt4MGMwOXg2MnJvMmU3M21vbjZmIn0.RWCidM5bmagDh2oyqh0_SQ';
     var map = new mapboxgl.Map({
     container: 'map',

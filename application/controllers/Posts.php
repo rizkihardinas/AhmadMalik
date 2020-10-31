@@ -131,7 +131,7 @@ class Posts extends CI_Controller
           $data[] = array(
           			$photo,
           			$r->title,
-                    substr($r->description, 0,100)."...",
+          			$r->dateCreated,
                     $button
                );
           }

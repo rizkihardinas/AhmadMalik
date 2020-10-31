@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller
 
 		$data['last_rating'] = $this->db_model->getQuery("SELECT rating.*, users.name as user, merchants.name as merchant FROM users INNER JOIN (rating INNER JOIN merchants ON rating.idMerchant=merchants.id) ON users.id=rating.idUser ORDER BY rating.id DESC LIMIT 10");
 
-		$data['top_merchant'] = $this->db_model->getQuery("SELECT rating.idMerchant, merchants.name, SUM(rating.rating) as rate, COUNT(rating.id) as count, merchants.photo FROM rating INNER JOIN merchants ON rating.idMerchant=merchants.id GROUP BY rating.idMerchant");
+		$data['top_merchant'] = $this->db_model->getQuery("SELECT merchants.name, rating.idMerchant, SUM(rating.rating) as rating, SUM(rating.rating) as rate, COUNT(rating.id) as count, merchants.photo FROM rating INNER JOIN merchants ON rating.idMerchant=merchants.id GROUP BY rating.idMerchant");
 
 		$data['judul'] = "Dashboard";
 		$data['contents'] = $this->load->view('main/dashboard',$data, TRUE);
@@ -114,6 +114,12 @@ class Dashboard extends CI_Controller
         $id = $this->input->post('id');
         $query = $this->db_model->deleteData('admin','id',$id);
         echo "Data Deleted";
+      }
+
+     function clear_notif(){
+        $query = $this->db_model->clearNotif();
+        
+		redirect('dashboard');
       }
     
 }

@@ -50,6 +50,8 @@ class Merchants extends CI_Controller
 	}
 	public function profile($id){
 		$data['judul'] = "Profile Merchants";
+
+		$data['all_rating'] = $this->db_model->getQuery("SELECT rating.*, users.name as user, merchants.name as merchant FROM users INNER JOIN (rating INNER JOIN merchants ON rating.idMerchant=merchants.id) ON users.id=rating.idUser WHERE rating.idMerchant = '".$id."' ORDER BY rating.id");
 		$data['merchant'] = $this->db_model->getQuery("SELECT merchants.*, SUM(rating.rating) as rate, COUNT(rating.id) as count FROM merchants INNER JOIN rating ON merchants.id=rating.idMerchant WHERE merchants.id='".$id."'");
 		$data['contents'] = $this->load->view('main/merchants/profile_merchants',$data, TRUE);
 		$this->load->view('index',$data);

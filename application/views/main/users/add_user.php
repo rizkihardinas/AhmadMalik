@@ -15,28 +15,22 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-group">
                     <label for="inputName">Nama</label>
                     <input type="text" id="name" name="name" class="form-control">
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-group">
                     <label for="inputClientCompany">Phone Number</label>
                     <input type="text" id="phone" name="phone" class="form-control">
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-group">
                     <label for="inputProjectLeader">Email</label>
                     <input type="email" id="email" name="email" class="form-control">
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="form-group">
-                    <label for="inputDescription">Password</label>
-                    <input type="password" id="password" name="password" class="form-control">
                   </div>
                 </div>
               </div>

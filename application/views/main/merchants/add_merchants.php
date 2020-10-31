@@ -58,6 +58,9 @@
                   <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile" name="customFile">
                       <label class="custom-file-label" for="customFile">Choose file</label>
+                      <span class="text-sm mb-0" style="color:#888;">
+                        Photo resolution 300x300 pixel
+                      </span>
                     </div>
               </div>
 
@@ -93,17 +96,17 @@
     zoom: 10 // starting zoom
     });
     map.on('click', function(e) {
-    // The event object (e) contains information like the
-    // coordinates of the point on the map that was clicked.
-    $('#latitude').val(e.lngLat);
-    var marker1 = new mapboxgl.Marker();
-    marker1.remove();
+      // The event object (e) contains information like the
+      // coordinates of the point on the map that was clicked.
+      $('#latitude').val(e.lngLat);
+      var marker1 = new mapboxgl.Marker();
+      marker1.remove();
 
-    var marker = new mapboxgl.Marker();
-    
-    marker.setLngLat(e.lngLat);
-    marker.addTo(map);
-  });
+      var marker = new mapboxgl.Marker();
+      
+      marker.setLngLat(e.lngLat);
+      marker.addTo(map);
+    });
     $(document).on('click','#save',function(){
       var name = $('#name').val();
       var latitude = $('#latitude').val();

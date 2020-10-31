@@ -131,5 +131,9 @@ class Database_model extends CI_Model
 		$query = $this->db->query("SELECT *,COUNT(idJenis) as jenis FROM notifikasi WHERE dateCreated BETWEEN DATE(NOW()) + INTERVAL -7 DAY AND CURRENT_DATE GROUP BY idJenis");
 		return $query->result_array();
 	}
+	function clearNotif(){
+		$this->db->empty_table('notifikasi');
+	}
+
 }
  ?>
