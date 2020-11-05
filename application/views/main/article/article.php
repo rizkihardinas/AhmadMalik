@@ -11,7 +11,7 @@
         <tr>
           <th>Artikel</th>
           <th>Judul</th>
-          <th>Artikel</th>
+          <th>Date Created</th>
           <th></th>
         </tr>
         </thead>

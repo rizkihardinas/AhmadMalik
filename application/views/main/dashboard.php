@@ -83,7 +83,7 @@
                       <span class="direct-chat-timestamp float-right"><?php echo $lr['dateCreated']; ?></span>
                     </div>
                     <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="<?php echo base_url('assets/') ?>img/user<?php echo $lr['rating']; ?>.png" alt="message user image">
+                    <img class="direct-chat-img" src="<?php echo base_url('assets/') ?>img/user<?php echo round($lr['rating']) ?>.png" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       <?php echo $lr['review']; ?><br>
@@ -150,7 +150,7 @@
                   <tr>
                     <td>
                       <img src="<?php echo base_url('uploads/') ?><?php echo $tm['photo']; ?>" class="img-circle img-size-32 mr-2">
-                      <?php echo $tm['name']; ?>
+                      <a style="color:#000;" href="<?php echo base_url('merchants/profile/') ?><?php echo $tm['idMerchant']; ?>"><?php echo $tm['name']; ?></a>
                     </td>
                     <td>
                       <?php 

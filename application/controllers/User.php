@@ -46,13 +46,11 @@ class User extends CI_Controller
 		$name = $this->input->post('name');
 		$phone  = $this->input->post('phone');
 		$email  = $this->input->post('email');
-		$password = $this->input->post('password');
 
         $data = array(
 			'name' => $name,
 			'phone' => $phone,
-			'email' => $email,
-			'password' => md5($password)
+			'email' => $email
 		);
         $insert  = $this->db_model->setInsertData('users',$data);
 		$this->session->set_flashdata('msg','Berhasil');
@@ -112,7 +110,7 @@ class User extends CI_Controller
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'user/edit/'.$r->id.'" target="_blank">Edit</a>
+                <a class="dropdown-item" no_faktur="'.$r->id.'" href="'. base_url().'user/edit/'.$r->id.'">Edit</a>
                 <a class="dropdown-item" id="btnHapusUser" data-id="'.$r->id.'">Hapus</a>
               </div>
             </div>
