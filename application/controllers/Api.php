@@ -53,6 +53,17 @@ class Api extends CI_Controller
 			echo json_encode($array);
 		}
 	}
+	function checkUlasan(){
+		$idUser = $this->input->post('idUser');
+		$idMerchant = $this->input->post('idMerchant');
+		$check = $this->api->countDetailData("rating",array('idUser' =>$idUser,'idMerchant' => $idMerchant));
+		if ($check > 0) {
+			$array = array('code' => 200);
+		}else{
+			$array = array('code' => 400);	
+		}
+		echo json_encode($array);
+	}
 	function checkEmail(){
 		$email = $this->input->post('email');
 		$phone = $this->input->post('phone');
