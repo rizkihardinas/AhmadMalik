@@ -74,8 +74,8 @@ class Api extends CI_Controller
 					'name' => $name
 				);
 				$id = $this->api->setInsertDataGetId('users',$data);
-				$dataUser = $this->api->getDetailDatWhere("id",array('id' => $id));
-				$array = array('code' => 200,'data'=> $dataUser);
+				$data['id'] = $id;
+				$array = array('code' => 200,'data'=> $data);
 			}
 		}
 		
@@ -112,10 +112,12 @@ class Api extends CI_Controller
 		}else{
 			$data = array(
 				'phone' => $phone,
-				'name' => $name
+				'name' => $name,
+				'email' =>$email
 			);
-			$id = $this->api->setInsertData('users',$data);
-			$array = array('code' => 200,'message'=> 'Daftar berhasil');
+			$id = $this->api->setInsertDataGetId('users',$data);
+			$data['id'] = $id;
+			$array = array('code' => 200,'message'=> 'Daftar berhasil','data' => $data);
 			
 		}
 		echo json_encode($array);
