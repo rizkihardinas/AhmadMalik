@@ -20,6 +20,10 @@
                 <input type="hidden" name="id" class="form-control" value="<?php echo $posts['id'] ?>">
               </div>
               <div class="form-group">
+                <label for="inputName">Youtube Link</label>
+                <input type="text" id="link" name="link" class="form-control" value="<?php echo $posts['link'] ?>">
+              </div>
+              <div class="form-group">
                 <label for="inputDescription">Deskripsi</label>
                 <textarea class="textarea" id="description" name="description" placeholder="Place some text here"
                           style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $posts['description'] ?></textarea>

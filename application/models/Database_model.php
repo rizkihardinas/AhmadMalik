@@ -88,8 +88,8 @@ class Database_model extends CI_Model
 		$data = $this->db->query("
 			SELECT 
 			merchants.*, 
-			round(  ( 6371  * acos( least(1.0,cos( radians(-6.8289067) )* cos( radians(merchants.latitude) ) * cos( radians(merchants.longitude) - radians(107.1426761) ) + sin( radians(-6.8289067) ) * sin( radians(merchants.latitude) ) ) )), 1) as jarak, IFNULL(SUM(rating.rating),0) as rating, COUNT(idUser) as reviewer
-			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant WHERE merchants.min_price >= 0 OR merchants.max_price <= 450000
+			round(  ( 6371  * acos( least(1.0,cos( radians(".$latitude.") )* cos( radians(merchants.latitude) ) * cos( radians(merchants.longitude) - radians(".$longitude.") ) + sin( radians(".$latitude.") ) * sin( radians(merchants.latitude) ) ) )), 1) as jarak, IFNULL(SUM(rating.rating),0) as rating, COUNT(idUser) as reviewer
+			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant WHERE merchants.min_price >= ".$min_price." OR merchants.max_price <= ".$max_price."
 			GROUP BY merchants.id HAVING jarak <= 50 ORDER BY jarak");
 
 		return $data->result_array();

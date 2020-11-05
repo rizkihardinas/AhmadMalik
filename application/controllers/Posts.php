@@ -30,6 +30,7 @@ class Posts extends CI_Controller
 
 		
 		$title = $this->input->post('title');
+		$link = $this->input->post('link');
 		$description = $this->input->post('description');
 
 		
@@ -51,6 +52,7 @@ class Posts extends CI_Controller
                 $file = $this->upload->data();
                 $data = array(
 					'title' => $title,
+					'link' => $link,
 					'foto' => $file['file_name'],
 					'description' => $description,
 					'idUser' => $this->session->userdata('id')
@@ -64,9 +66,15 @@ class Posts extends CI_Controller
 	}
 	function update(){
 		$title = $this->input->post('title');
+		$link = $this->input->post('link');
 		$id = $this->input->post('id');
 		$description = $this->input->post('description');
-		
+		$data = array(
+			'title' => $title,
+			'link' => $link,
+			'description' => $description,
+			'idUser' => $this->session->userdata('id')
+		);
         if ($this->input->post('customFile')) {
         	$config['upload_path']          = './uploads/posts';
 	        $config['allowed_types']        = 'gif|jpg|png';
@@ -86,11 +94,7 @@ class Posts extends CI_Controller
 	                $data['foto'] = $file['file_name'];
 	        }
         }
-        $data = array(
-			'title' => $title,
-			'description' => $description,
-			'idUser' => $this->session->userdata('id')
-		);
+        
        	$this->db_model->update('posts',$data,array('id'=>$id));
 		$this->session->set_flashdata('msg','Update Berhasil!');
 		$this->session->set_flashdata('response','success');
