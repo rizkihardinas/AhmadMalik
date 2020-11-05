@@ -17,9 +17,8 @@
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
                 <input type="text" id="name" name="name" class="form-control">
-                <input type="hidden" id="latitude" name="latitude" class="form-control">
-                <input type="hidden" id="longitude" name="longitude" class="form-control">
               </div>
+              
               <div class="form-group">
                 <label for="inputClientCompany">Harga Terendah</label>
                 <input type="text" id="min_price" name="min_price" class="form-control">
@@ -63,7 +62,14 @@
                       </span>
                     </div>
               </div>
-
+              <div class="form-group">
+                <label for="inputName">Latitude</label>
+                <input type="text" id="latitude" name="latitude" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Longitude</label>
+                <input type="text" id="longitude" name="longitude" class="form-control">
+              </div>
               <div class="form-group">
                 <label for="inputEstimatedBudget">Merchants Location</label>
                   <div class="custom-file">
@@ -98,7 +104,8 @@
     map.on('click', function(e) {
       // The event object (e) contains information like the
       // coordinates of the point on the map that was clicked.
-      $('#latitude').val(e.lngLat);
+      $('#latitude').val(e.lngLat.lat);
+      $('#longitude').val(e.lngLat.lng);
       var marker1 = new mapboxgl.Marker();
       marker1.remove();
 

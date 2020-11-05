@@ -17,8 +17,6 @@
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
                 <input type="hidden" name="id" class="form-control" value="<?php echo $merchant['id'] ?>">
-                <input type="hidden" id="latitude" name="latitude" class="form-control" value="LngLat(<?php echo $merchant['longitude'] ?>, <?php echo $merchant['latitude'] ?>)">
-                <input type="text" id="name" name="name" class="form-control" value="<?php echo $merchant['name'] ?>">
               </div>
               <div class="form-group">
                 <label for="inputClientCompany">Harga Terendah</label>
@@ -63,7 +61,14 @@
                       </span>
                     </div>
               </div>
-
+              <div class="form-group">
+                <label for="inputName">Latitude</label>
+                <input type="text" id="latitude" name="latitude" class="form-control" value="<?php echo $merchant['latitude'] ?>">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Longitude</label>
+                <input type="text" id="longitude"  name="longitude" class="form-control" value="<?php echo $merchant['longitude'] ?>">
+              </div>
               <div class="form-group">
                 <label for="inputEstimatedBudget">Merchants Location</label>
                   <div class="custom-file">
@@ -87,7 +92,7 @@
     <!-- /.content -->
     <script>
 
-    var latlong = [<?php echo $merchant['latitude'] ?>,<?php echo $merchant['longitude'] ?>];
+    var latlong = [<?php echo $merchant['longitude'] ?>,<?php echo $merchant['latitude'] ?>];
     mapboxgl.accessToken = 'pk.eyJ1Ijoicml6a2loYXJkaW5hcyIsImEiOiJja2ZzMGt4MGMwOXg2MnJvMmU3M21vbjZmIn0.RWCidM5bmagDh2oyqh0_SQ';
     var map = new mapboxgl.Map({
     container: 'map',
@@ -101,7 +106,8 @@
     map.on('click', function(e) {
     // The event object (e) contains information like the
     // coordinates of the point on the map that was clicked.
-    $('#latitude').val(e.lngLat);
+    $('#latitude').val(e.lngLat.lat);
+    $('#longitude').val(e.lngLat.lng);
     var marker1 = new mapboxgl.Marker();
     marker1.remove();
 

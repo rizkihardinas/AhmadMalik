@@ -64,15 +64,8 @@ class Merchants extends CI_Controller
 		$address = $this->input->post('address');
 		$max_price = $this->input->post('max_price');
 		$description = $this->input->post('description');
-		$latLng = $this->input->post('latitude');
-
-		$latLng = str_replace('LngLat(', '', $latLng);
-		$latLng = str_replace(')', '', $latLng);
-		$dataLatLng = explode(',', $latLng);
-		$latitude = $dataLatLng[0];
-		$longitude = $dataLatLng[1];
-		
-		
+		$latitude = $this->input->post('latitude');
+		$longitude = $this->input->post('longitude');
 		$config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         // $config['max_size']             = 100;
@@ -113,13 +106,8 @@ class Merchants extends CI_Controller
 		$address = $this->input->post('address');
 		$max_price = $this->input->post('max_price');
 		$description = $this->input->post('description');
-		$latLng = $this->input->post('latitude');
-
-		$latLng = str_replace('LngLat(', '', $latLng);
-		$latLng = str_replace(')', '', $latLng);
-		$dataLatLng = explode(',', $latLng);
-		$latitude = $dataLatLng[0];
-		$longitude = $dataLatLng[1];
+		$latitude = $this->input->post('latitude');
+		$longitude = $this->input->post('longitude');
 		
 		
 		
