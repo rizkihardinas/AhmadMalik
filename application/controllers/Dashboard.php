@@ -117,7 +117,7 @@ class Dashboard extends CI_Controller
       }
 
      function clear_notif(){
-        $query = $this->db_model->clearNotif();
+        $query = $this->db_model->emptyTable('notifikasi');
         
 		redirect('dashboard');
       }

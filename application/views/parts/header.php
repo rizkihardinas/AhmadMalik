@@ -88,9 +88,12 @@ function time_elapsed_string($datetime, $full = false) {
           <?php 
 
           $notif = $this->db->query("SELECT COUNT(idJenis) as jenis FROM notifikasi")->row_array();
-
+          if ($notif['jenis'] == 0) {
+            echo "";
+          }else{
+            echo '<span class="badge badge-warning navbar-badge">'.$notif['jenis'].'</span>';
+          }
            ?>
-          <span class="badge badge-warning navbar-badge"><?php echo $notif['jenis'] ?></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header"><?php echo $notif['jenis'] ?> Notifikasi</span>

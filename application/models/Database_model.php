@@ -118,5 +118,9 @@ class Database_model extends CI_Model
 		$this->db->order_by('posts.id','DESC');
 		return $this->db->get()->result_array();
 	}
+
+	function emptyTable($table){
+		$this->db->empty_table($table);
+	}
 }
  ?>

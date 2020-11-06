@@ -40,9 +40,9 @@ class Admin extends CI_Controller
 		$data['contents'] = $this->load->view('main/admin/edit_admin',$data, TRUE);
 		$this->load->view('index',$data);
 	}
-	public function access(){
+	public function database(){
 
-		$data['judul'] = "Access Admin";
+		$data['judul'] = "Database";
 		$data['contents'] = $this->load->view('main/admin/access_admin',null, TRUE);
 		$this->load->view('index',$data);
 	}
@@ -144,6 +144,38 @@ class Admin extends CI_Controller
         $query = $this->db_model->deleteData('admin','id',$id);
         echo "Data Deleted";
       }
-    
+
+     function clear_merchants(){
+        $query = $this->db_model->emptyTable('merchants');
+		redirect('merchants');
+      }
+     function clear_posts(){
+        $query = $this->db_model->emptyTable('posts');
+		redirect('posts');
+      }
+     function clear_users(){
+        $query = $this->db_model->emptyTable('users');
+		redirect('user');
+      }
+
+    function backup_db(){
+        // Load the DB utility class
+	    $this->load->dbutil();
+
+	    $aturan =  $arrayName = array(
+	    	'format' => 'zip',
+	    	'filename' => 'my_db_vape.sql'
+	    );
+	    $backup = $this->dbutil->backup($aturan);
+
+	    $nama_database = 'backup-on-'.date("Y-m-d-H-i-s").'.zip';
+	    $simpan = '/backup'.$nama_database;
+
+	    $this->load->helper('file');
+	    write_file($simpan, $backup);
+
+	    $this->load->helper('download');
+	    force_download($nama_database, $backup);
+      }
 }
  ?>
