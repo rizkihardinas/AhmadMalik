@@ -162,6 +162,7 @@ class Api extends CI_Controller
 			$this->api->update("users",$data,array('id' => $id));
 			$array = array('code' => 200,'message'=> 'Berhasil');
 		}
+		echo json_encode($array);
 	}
 }
  ?>
