@@ -145,8 +145,23 @@ class Api extends CI_Controller
 		$post = $this->api->getMaxPriceStore();
 		echo json_encode($post);
 	}
-	function test(){
-		
+	function updateProfile(){
+		$id = $this->input->post('id');
+		$name = $this->input->post('name');
+		$phone = $this->input->post('phone');
+		$email = $this->input->post('email');
+
+		if ($id == 0 || $id == '') {
+			$array = array('code' => 400,'message'=> 'Gagal');
+		}else{
+			$data = array(
+				'name' => $name,
+				'phone' => $phone,
+				'email' => $email
+			);
+			$this->api->update("users",$data,array('id' => $id));
+			$array = array('code' => 200,'message'=> 'Berhasil');
+		}
 	}
 }
  ?>
