@@ -122,5 +122,13 @@ class Database_model extends CI_Model
 	function emptyTable($table){
 		$this->db->empty_table($table);
 	}
+	function getBannerStore(){
+		$data = $this->db->query("
+			SELECT 
+			merchants.*,IFNULL(SUM(rating.rating),0) as rating, COUNT(idUser) as reviewer
+			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant
+			GROUP BY merchants.id ORDER BY rating DESC LIMIT 4 ");
+		return $data->result_array();
+	}
 }
  ?>
