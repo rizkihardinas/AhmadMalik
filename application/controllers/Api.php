@@ -53,6 +53,46 @@ class Api extends CI_Controller
 			echo json_encode($array);
 		}
 	}
+	function insertUlasanPost(){
+		$idUser = $this->input->post('idUser');
+		$idPost = $this->input->post('idPost');
+		$rating = $this->input->post('rating');
+		$comment = $this->input->post('comment');
+
+		$check = $this->api->countDetailData("ratingpost",array('idUser' =>$idUser,'idPost' => $idPost));
+		if ($check > 0) {
+			$array = array('code' => 400);
+			echo json_encode($array);
+		}else{
+			$dataInsert = array(
+				'idUser' =>$idUser,
+				'idPost' =>$idPost,
+				'rating' =>$rating,
+				'comment' =>$comment
+			);
+			$this->api->setInsertData('ratingpost',$dataInsert);
+			$array = array('code' => 200);
+			echo json_encode($array);
+		}
+	}
+	function insertVisitor(){
+		$ip = $this->input->post('ip');
+		$idPost = $this->input->post('idPost');
+
+		$check = $this->api->countDetailData("ratingpost",array('ip' =>$ip,'idPost' => $idPost));
+		if ($check > 0) {
+			$array = array('code' => 400);
+			echo json_encode($array);
+		}else{
+			$dataInsert = array(
+				'ip' =>$ip,
+				'idPost' =>$idPost
+			);
+			$this->api->setInsertData('visitorpost',$dataInsert);
+			$array = array('code' => 200);
+			echo json_encode($array);
+		}
+	}
 	function checkUlasan(){
 		$idUser = $this->input->post('idUser');
 		$idMerchant = $this->input->post('idMerchant');
@@ -163,6 +203,10 @@ class Api extends CI_Controller
 			$array = array('code' => 200,'message'=> 'Berhasil');
 		}
 		echo json_encode($array);
+	}
+	function getBannerStore(){
+		$banner = $this->api->getBannerStore();
+		echo json_encode($banner);
 	}
 }
  ?>
