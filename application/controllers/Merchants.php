@@ -110,8 +110,16 @@ class Merchants extends CI_Controller
 		$longitude = $this->input->post('longitude');
 		
 		
-		
-        if ($this->input->post('customFile')) {
+		$data = array(
+			'name' => $name,
+			'min_price' => $min_price,
+			'max_price' => $max_price,
+			'description' => $description,
+			'address' => $address,
+			'latitude' => $latitude,
+			'longitude' => $longitude
+		);
+        if ($_FILES['customFile']) {
         	$config['upload_path']          = './uploads/';
 	        $config['allowed_types']        = 'gif|jpg|png';
 	        // $config['max_size']             = 100;
@@ -130,15 +138,7 @@ class Merchants extends CI_Controller
 	                $data['photo'] = $file['file_name'];
 	        }
         }
-        $data = array(
-			'name' => $name,
-			'min_price' => $min_price,
-			'max_price' => $max_price,
-			'description' => $description,
-			'address' => $address,
-			'latitude' => $latitude,
-			'longitude' => $longitude
-		);
+        
        	$this->db_model->update('merchants',$data,array('id'=>$id));
 		$this->session->set_flashdata('msg','Update Berhasil!');
 		$this->session->set_flashdata('response','success');
