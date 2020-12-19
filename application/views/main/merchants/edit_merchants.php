@@ -16,6 +16,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Nama Merchants</label>
+                <input type="text" id="name" name="name" class="form-control" value="<?php echo $merchant['name'] ?>">
                 <input type="hidden" name="id" class="form-control" value="<?php echo $merchant['id'] ?>">
               </div>
               <div class="form-group">
