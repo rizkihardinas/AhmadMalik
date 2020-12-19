@@ -112,9 +112,12 @@ class Database_model extends CI_Model
 		return $this->db->get();
 	}
 	function getPost(){
-		$this->db->select('posts.*,admin.name as user');
+		$this->db->select('posts.*,admin.name as user,IFNULL(SUM(ratingpost.rating),0) as rating, COUNT(ratingpost.idUser) as reviewer');
 		$this->db->from('posts');
 		$this->db->join('admin','posts.idUser = admin.id');
+		$this->db->join('ratingpost','posts.id = ratingpost.idPost');
+		
+		$this->db->group_by('posts.id');
 		$this->db->order_by('posts.id','DESC');
 		return $this->db->get()->result_array();
 	}
@@ -129,6 +132,15 @@ class Database_model extends CI_Model
 			FROM merchants LEFT JOIN rating ON merchants.id = rating.idMerchant
 			GROUP BY merchants.id ORDER BY rating DESC LIMIT 4 ");
 		return $data->result_array();
+	}
+	function getUlasanPost($idPost){
+
+		$this->db->select('users.name,ratingpost.*');
+		$this->db->from('users');
+		$this->db->join('ratingpost','users.id = ratingpost.idUser');
+		$this->db->where('ratingpost.idPost',$idPost);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 }
  ?>
